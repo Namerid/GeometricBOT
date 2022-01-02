@@ -151,12 +151,11 @@ def lalala(message):
 		markup = types.InlineKeyboardMarkup(row_width=1)
 		
 		item1 = types.InlineKeyboardButton('Формулы сокращенного умножения', callback_data='formula')
-		item2 = types.InlineKeyboardButton('Sin', callback_data='sh_sin')
-		item3 = types.InlineKeyboardButton('Cos', callback_data='sh_cos')
-		item4 = types.InlineKeyboardButton('Tg', callback_data='sh_tg')
-		item5 = types.InlineKeyboardButton('Ctg', callback_data='sh_ctg')
+		item2 = types.InlineKeyboardButton('Вид кв. уравнения', callback_data='кв. уравнение')
+		item3 = types.InlineKeyboardButton('Дискриминант', callback_data='Дискриминант')
+		item4 = types.InlineKeyboardButton('т. Виета', callback_data='т. Виета')
 
-		markup.add(item1, item2, item3, item4, item5)
+		markup.add(item1, item2, item3, item4)
 
 		bot.send_message(message.chat.id, 'Выберете шпаргалку',reply_markup = markup)
 
@@ -184,10 +183,6 @@ def lalala(message):
 @bot.callback_query_handler(func=lambda call: True)
 def choose(call):
 	if call.message:
-		if call.data == 'sh_sin':
-			
-			bot.edit_message_text(chat_id=call.message.chat.id, message_id= call.message.message_id, text='Выбери шпаргалку',
-			reply_markup=None)
 		
 		if call.data == 'pr_back':
 			bot.edit_message_text(chat_id=call.message.chat.id, message_id= call.message.message_id, text='Введите значение:',
@@ -337,6 +332,30 @@ def choose(call):
 			journal.close()
 
 			bot.edit_message_text(chat_id=call.message.chat.id, message_id= call.message.message_id, text='Выберете единицы измерения',
+			reply_markup=None)
+		
+		if call.data == 'formula':
+			bot.send_photo(call.message.chat.id, open('photo/formula.png','rb'))
+			
+			bot.edit_message_text(chat_id=call.message.chat.id, message_id = call.message.message_id, text='Выбери шпаргалку',
+			reply_markup=None)
+
+		if call.data == 'кв. уравнение':
+			bot.send_photo(call.message.chat.id, open('photo/кв. уравнение.png','rb'))
+
+			bot.edit_message_text(chat_id=call.message.chat.id, message_id= call.message.message_id, text='Выбери шпаргалку',
+			reply_markup=None)
+
+		if call.data == 'Дискриминант':
+			bot.send_photo(call.message.chat.id, open('photo/Дискриминант.png','rb'))
+
+			bot.edit_message_text(chat_id=call.message.chat.id, message_id= call.message.message_id, text='Выбери шпаргалку',
+			reply_markup=None)
+
+		if call.data == 'т. Виета':
+			bot.send_photo(call.message.chat.id, open('photo/т. Виета.png','rb'))
+
+			bot.edit_message_text(chat_id=call.message.chat.id, message_id= call.message.message_id, text='Выбери шпаргалку',
 			reply_markup=None)
 
 bot.polling (none_stop=True)
