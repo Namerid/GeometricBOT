@@ -154,8 +154,9 @@ def lalala(message):
 		item2 = types.InlineKeyboardButton('Вид кв. уравнения', callback_data='кв. уравнение')
 		item3 = types.InlineKeyboardButton('Дискриминант', callback_data='Дискриминант')
 		item4 = types.InlineKeyboardButton('т. Виета', callback_data='т. Виета')
+		item5 = types.InlineKeyboardButton('Тригонометрические функции', callback_data='Тригонометрические функции')
 
-		markup.add(item1, item2, item3, item4)
+		markup.add(item1, item2, item3, item4, item5)
 
 		bot.send_message(message.chat.id, 'Выберете шпаргалку',reply_markup = markup)
 
@@ -354,6 +355,16 @@ def choose(call):
 
 		if call.data == 'т. Виета':
 			bot.send_photo(call.message.chat.id, open('photo/т. Виета.png','rb'))
+
+			bot.edit_message_text(chat_id=call.message.chat.id, message_id= call.message.message_id, text='Выбери шпаргалку',
+			reply_markup=None)
+
+		if call.data == 'Тригонометрические функции':
+			bot.send_photo(call.message.chat.id, open('photo/треугольник.png', 'rb'))
+			bot.send_photo(call.message.chat.id, open('photo/табл. треугольник.png', 'rb'))
+			bot.send_photo(call.message.chat.id, open('photo/табл. тригонометрические функции.png', 'rb'))
+			bot.send_photo(call.message.chat.id, open('photo/тригонометрические формулы.png', 'rb'))
+			bot.send_photo(call.message.chat.id, open('photo/тригонометрические формулы2.png', 'rb'))
 
 			bot.edit_message_text(chat_id=call.message.chat.id, message_id= call.message.message_id, text='Выбери шпаргалку',
 			reply_markup=None)
