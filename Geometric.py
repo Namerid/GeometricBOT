@@ -150,15 +150,12 @@ def lalala(message):
 	if message.text == 'Шпаргалка':
 		markup = types.InlineKeyboardMarkup(row_width=1)
 		
-		item1 = types.InlineKeyboardButton('Формулы сокращенного умножения', callback_data='formula')
-		item2 = types.InlineKeyboardButton('Вид кв. уравнения', callback_data='кв. уравнение')
-		item3 = types.InlineKeyboardButton('Дискриминант', callback_data='Дискриминант')
-		item4 = types.InlineKeyboardButton('т. Виета', callback_data='т. Виета')
-		item5 = types.InlineKeyboardButton('Тригонометрические функции', callback_data='Тригонометрические функции')
+		item1 = types.InlineKeyboardButton('Алгебра', callback_data='алгебра')
+		item2 = types.InlineKeyboardButton('Геометрия', callback_data='геометрия')
+	
+		markup.add(item1, item2)
 
-		markup.add(item1, item2, item3, item4, item5)
-
-		bot.send_message(message.chat.id, 'Выберете шпаргалку',reply_markup = markup)
+		bot.send_message(message.chat.id, 'Выберете шпаргалку:',reply_markup = markup)
 
 		journal = open('journal.txt', 'r')
 		dictionary = eval(journal.read())
@@ -335,31 +332,66 @@ def choose(call):
 			bot.edit_message_text(chat_id=call.message.chat.id, message_id= call.message.message_id, text='Выберете единицы измерения',
 			reply_markup=None)
 		
-		if call.data == 'formula':
+
+		if call.data == 'алгебра':
+
+			markup = types.InlineKeyboardMarkup(row_width=1)
+		
+			item1 = types.InlineKeyboardButton('Основные формулы', callback_data='основные формулы')
+			item2 = types.InlineKeyboardButton('Уравнения', callback_data='уравнения')
+			item3 = types.InlineKeyboardButton('Неравенства', callback_data='неравенства')
+			item4 = types.InlineKeyboardButton('Функции', callback_data='функции')
+			item5 = types.InlineKeyboardButton('Прогрессия', callback_data='прогрессия')
+			item6 = types.InlineKeyboardButton('Производная', callback_data='производная')
+			item7 = types.InlineKeyboardButton('Первообразная Интеграл', callback_data='первообразная интеграл')
+			item8 = types.InlineKeyboardButton('Комбинаторика', callback_data='комбинаторика')
+	
+			markup.add(item1, item2, item3, item4, item5, item6, item7, item8)
+
+			
+			bot.edit_message_text(chat_id=call.message.chat.id, message_id = call.message.message_id, text='Выберете шпаргалку:',
+			reply_markup=markup)
+
+
+		if call.data == 'основные формулы':
+
+			markup = types.InlineKeyboardMarkup(row_width=1)
+		
+			item1 = types.InlineKeyboardButton('Формулы сокращенного умножения', callback_data='формулы сокращенного умножения')
+			item2 = types.InlineKeyboardButton('Дискриминант', callback_data='дискриминант')
+			item3 = types.InlineKeyboardButton('т. Виета', callback_data='т. Виета')
+			item4 = types.InlineKeyboardButton('Тригонометрические функции', callback_data='тригонометрические функции')
+	
+			markup.add(item1, item2, item3, item4)
+
+			
+			bot.edit_message_text(chat_id=call.message.chat.id, message_id = call.message.message_id, text='Выберете шпаргалку:',
+			reply_markup=markup)
+		
+			
+		if call.data == 'формулы сокращенного умножения':
+			
 			bot.send_photo(call.message.chat.id, open('photo/formula.png','rb'))
 			
-			bot.edit_message_text(chat_id=call.message.chat.id, message_id = call.message.message_id, text='Выбери шпаргалку',
+			bot.edit_message_text(chat_id=call.message.chat.id, message_id = call.message.message_id, text='Выберете шпаргалку:',
 			reply_markup=None)
 
-		if call.data == 'кв. уравнение':
-			bot.send_photo(call.message.chat.id, open('photo/кв. уравнение.png','rb'))
-
-			bot.edit_message_text(chat_id=call.message.chat.id, message_id= call.message.message_id, text='Выбери шпаргалку',
-			reply_markup=None)
-
-		if call.data == 'Дискриминант':
+		if call.data == 'дискриминант':
+		
 			bot.send_photo(call.message.chat.id, open('photo/Дискриминант.png','rb'))
-
-			bot.edit_message_text(chat_id=call.message.chat.id, message_id= call.message.message_id, text='Выбери шпаргалку',
+			
+			bot.edit_message_text(chat_id=call.message.chat.id, message_id = call.message.message_id, text='Выберете шпаргалку:',
 			reply_markup=None)
 
 		if call.data == 'т. Виета':
-			bot.send_photo(call.message.chat.id, open('photo/т. Виета.png','rb'))
 
-			bot.edit_message_text(chat_id=call.message.chat.id, message_id= call.message.message_id, text='Выбери шпаргалку',
+			bot.send_photo(call.message.chat.id, open('photo/т. Виета.png','rb'))
+			
+			bot.edit_message_text(chat_id=call.message.chat.id, message_id = call.message.message_id, text='Выберете шпаргалку:',
 			reply_markup=None)
 
-		if call.data == 'Тригонометрические функции':
+		if call.data == 'тригонометрические функции':
+			
 			bot.send_photo(call.message.chat.id, open('photo/треугольник.png', 'rb'))
 			bot.send_photo(call.message.chat.id, open('photo/табл. треугольник.png', 'rb'))
 			bot.send_photo(call.message.chat.id, open('photo/табл. тригонометрические функции.png', 'rb'))
@@ -368,6 +400,111 @@ def choose(call):
 
 			bot.edit_message_text(chat_id=call.message.chat.id, message_id= call.message.message_id, text='Выбери шпаргалку',
 			reply_markup=None)
+
+		
+		if call.data == 'уравнения':
+			
+			markup = types.InlineKeyboardMarkup(row_width=1)
+		
+			item1 = types.InlineKeyboardButton('Кв. уравнение', callback_data='кв. уравнение')
+			
+	
+			markup.add(item1)
+
+			
+			bot.edit_message_text(chat_id=call.message.chat.id, message_id = call.message.message_id, text='Выберете шпаргалку:',
+			reply_markup=markup)
+
+		
+
+		if call.data == 'кв. уравнение':
+			
+			bot.send_photo(call.message.chat.id, open('photo/кв. уравнение.png','rb'))
+			
+			bot.edit_message_text(chat_id=call.message.chat.id, message_id = call.message.message_id, text='Выберете шпаргалку:',
+			reply_markup=None)
+
+
+
+		if call.data == 'геометрия':
+			
+			markup = types.InlineKeyboardMarkup(row_width=1)
+		
+			item1 = types.InlineKeyboardButton('Планиметрия', callback_data='планиметрия')
+			item2 = types.InlineKeyboardButton('Стереометрия', callback_data='стереометрия')
+		
+	
+			markup.add(item1, item2)
+
+			
+			bot.edit_message_text(chat_id=call.message.chat.id, message_id = call.message.message_id, text='Выберете шпаргалку:',
+			reply_markup=markup)
+
+
+		if call.data == 'планиметрия':
+			
+			markup = types.InlineKeyboardMarkup(row_width=1)
+		
+			item1 = types.InlineKeyboardButton('Простые фигуры на плоскости', callback_data='простые фигуры на плоскости')
+			item2 = types.InlineKeyboardButton('Треугольники', callback_data='треугольники')
+			item3 = types.InlineKeyboardButton('Четырехугольники', callback_data='четырехугольники')
+			item4 = types.InlineKeyboardButton('Окружность и круг', callback_data='окружность и круг')
+			item5 = types.InlineKeyboardButton('Площади фигур', callback_data='площади фигур')
+			item6 = types.InlineKeyboardButton('Векторы', callback_data='векторы')
+			item7 = types.InlineKeyboardButton('Геометрические преобразования на плоскости', callback_data='геом. преобразования на плоскости')
+	
+			markup.add(item1, item2, item3, item4, item5, item6, item7)
+
+			
+			bot.edit_message_text(chat_id=call.message.chat.id, message_id = call.message.message_id, text='Выберете шпаргалку:',
+			reply_markup=markup)
+
+
+		if call.data == 'стереометрия':
+
+			markup = types.InlineKeyboardMarkup(row_width=1)
+		
+			item1 = types.InlineKeyboardButton('Многогранники', callback_data='многогранники')
+			item2 = types.InlineKeyboardButton('Тела вращения', callback_data='тела вращения')
+		
+	
+			markup.add(item1, item2)
+
+			
+			bot.edit_message_text(chat_id=call.message.chat.id, message_id = call.message.message_id, text='Выберете шпаргалку:',
+			reply_markup=markup)
+
+
+		if call.data == 'многогранники':
+
+			markup = types.InlineKeyboardMarkup(row_width=1)
+		
+			item1 = types.InlineKeyboardButton('Призма', callback_data='призма')
+			item2 = types.InlineKeyboardButton('Пирамида', callback_data='пирамида')
+		
+	
+			markup.add(item1, item2)
+
+			
+			bot.edit_message_text(chat_id=call.message.chat.id, message_id = call.message.message_id, text='Выберете шпаргалку:',
+			reply_markup=markup)
+
+
+		if call.data == 'тела вращения':
+
+			markup = types.InlineKeyboardMarkup(row_width=1)
+		
+			item1 = types.InlineKeyboardButton('Цилиндр', callback_data='цилиндр')
+			item2 = types.InlineKeyboardButton('Конус', callback_data='конус')
+			item3 = types.InlineKeyboardButton('Шар', callback_data='шар')
+		
+	
+			markup.add(item1, item2, item3)
+
+			
+			bot.edit_message_text(chat_id=call.message.chat.id, message_id = call.message.message_id, text='Выберете шпаргалку:',
+			reply_markup=markup)
+
 
 bot.polling (none_stop=True)
 
